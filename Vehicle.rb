@@ -11,6 +11,9 @@ class Car
 end
 
 
+class Passenger
+
+end
 
 
 # CARS
