@@ -16,6 +16,7 @@ class Car
     @driver = passenger if passenger.age > 18
   end
   
+  
 end
 
 
@@ -31,4 +32,12 @@ car1.name = "Astra"
 car1.brand = "Opel"
 puts "Car definition : #{car1}"
 # "#{car1}" est équivalent à la méthode to_s c-a-d : "Brand : #{brand}, Name: #{name}"
-                  
+ 
+#PASSENGERS    
+p1 = Passenger.new()
+p1.name = "Yann"             
+p1.age = 19
+
+p2 = Passenger.new()
+p2.name = "Nicolas"             
+p2.age = 15
