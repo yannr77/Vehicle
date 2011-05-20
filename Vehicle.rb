@@ -12,6 +12,7 @@ end
 
 
 class Passenger
+  attr_accessor :name, :age
 
 end
 
