@@ -2,11 +2,16 @@
 
 class Car
 
-  attr_accessor :name, :brand
+  attr_accessor :name, :brand, :driver
   
   def to_s
     "Brand : #{brand}, Name: #{name}"
   end
+  
+  def driver
+    @driver
+  end
+  
   
 end
 
