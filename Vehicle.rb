@@ -30,9 +30,6 @@ end
 class Passenger
   attr_accessor :name, :age
 
-  def count_passengers?
-  count_passengers.count < 5 
-  end
 
   def to_s
     "#{name} (#{age} years old) "
@@ -73,16 +70,15 @@ car1.driver = p1
 puts "The car1's driver is #{car1.driver}"
 #puts "The car2's driver is #{car2.driver}."
 
-#verifier qu'il n'y pas de pasager
-puts "No passenger" if car1.passengers.count == 0
 car1.add_passenger(p1)
-
-# verifier qu'il y a 1 passager et que c'est p1
-puts "There is a passenger" if car1.passengers.count == 1
-
-puts "Yann is in the car" if car1.passengers.include?(p1)
-
 car1.add_passenger(p2)
 
+#verifier qu'il n'y pas de pasager
+puts "No passenger" if car1.passengers.count == 0
+   
+# verifier qu'il y a 1 passager et que c'est p1
+puts "There is a passenger" if car1.passengers.count == 1
+puts "#{p2.name} is in the car" if car1.passengers.include?(p2)    
+
+#Afficher tous les passagers de car1    
 puts "Passengers : #{car1.passengers}"
-puts "Nicolas is in the car" if car1.passengers.include?(p2)
