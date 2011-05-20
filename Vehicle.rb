@@ -16,7 +16,7 @@ class Car
   end
 
   def to_s
-    "Brand : #{brand}, Name: #{name}. "
+    "Brand : #{brand}, Name: #{name}, Passager(s) : #{@passengers.count} "
   end
   
   def driver=(new_driver)
@@ -30,8 +30,20 @@ class Car
     else      
       puts "#{new_driver} is too young."
     end
+    
+    
+  
+    if new_driver.can_accompagnated_drive?
+        if @passengers.accompanist?
+          @driver = new_driver
+        else 
+          "It isn't good"
+        end
+    end
+    
   end
     
+        
   def add_passenger(new_passenger)
     if @passengers.count <= 5
       if ((@passengers.include?(new_passenger)) && (driver = new_passenger))
@@ -41,10 +53,12 @@ class Car
       end
     end
   end
-  
+
   def delete_passenger(sup_passenger)
     @passengers.delete(sup_passenger)
   end
+  
+ 
   
 end
 
@@ -57,9 +71,13 @@ class Passenger
   end
   
   def can_drive?
-    age > 18
+    age >= 18
   end
   
+  def can_accompagnated_drive?
+    age > 16 && age < 18
+  end
+
 end
 
 # CARS
@@ -68,8 +86,6 @@ car1.name = "Astra"
 car1.brand = "Opel"
 
 
-
- 
 #car2 = Car.new()
 #car2.name = "A5"
 #car2.brand = "Audi"
@@ -79,7 +95,7 @@ car1.brand = "Opel"
 #PASSENGERS    
 p1 = Passenger.new()
 p1.name = "Yann"             
-p1.age = 19
+p1.age = 17
 
 p2 = Passenger.new()
 p2.name = "Nicolas"             
@@ -89,11 +105,14 @@ p3 = Passenger.new()
 p3.name = "Robert"             
 p3.age = 26
 
+puts " #{p1} #{p1.can_accompagnated_drive?}"
+puts " #{p2} #{p2.can_accompagnated_drive?}"
+puts " #{p3} #{p3.can_accompagnated_drive?}"
 
 # l'ordre du "car1.add_passenger" et du "car1.driver " est important pour lalgo du dessu avec les if
 car1.add_passenger(p1)
 car1.add_passenger(p3)
-car1.driver = p1
+car1.driver = p2
 #car1.delete_passenger(p2)
 
 puts "------------"
@@ -118,5 +137,8 @@ if car1.passengers.count == 1
 else
   puts "Passengers : #{car1.passengers}"
 end
+
+
+
 
 puts "------------"
