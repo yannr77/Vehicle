@@ -22,7 +22,8 @@ class Car
   def driver=(new_driver)
     if new_driver.can_drive?
       if @passengers.include?(new_driver)
-        puts "The driver is already a passager"
+        delete_passenger(new_driver)
+        @driver = new_driver
       else      
         @driver = new_driver 
       end
@@ -44,6 +45,7 @@ class Car
   def delete_passenger(sup_passenger)
     @passengers.delete(sup_passenger)
   end
+  
 end
 
 
@@ -89,10 +91,10 @@ p3.age = 26
 
 
 # l'ordre du "car1.add_passenger" et du "car1.driver " est important pour lalgo du dessu avec les if
-car1.add_passenger(p2)
+car1.add_passenger(p1)
 car1.add_passenger(p3)
 car1.driver = p1
-car1.delete_passenger(p2)
+#car1.delete_passenger(p2)
 
 puts "------------"
 
