@@ -40,7 +40,10 @@ class Car
       end
     end
   end
-    
+  
+  def delete_passenger(sup_passenger)
+    @passengers.delete(sup_passenger)
+  end
 end
 
 
@@ -87,9 +90,9 @@ p3.age = 26
 
 # l'ordre du "car1.add_passenger" et du "car1.driver " est important pour lalgo du dessu avec les if
 car1.add_passenger(p2)
-car1.add_passenger(p1)
+car1.add_passenger(p3)
 car1.driver = p1
-
+car1.delete_passenger(p2)
 
 puts "------------"
 
