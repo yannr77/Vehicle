@@ -6,7 +6,7 @@ class Car
   def passengers
     @passengers
   end
-
+  
   def passengers=(value)
     @passengers = value
   end
@@ -20,19 +20,23 @@ class Car
   end
   
   def driver=(new_driver)
-    if new_driver.can_drive? 
-      @driver = new_driver 
-    else
+    if new_driver.can_drive?
+      if @passengers.include?(new_driver)
+        puts "The driver is already a passager"
+      else      
+        @driver = new_driver 
+      end
+    else      
       puts "#{new_driver} is too young."
     end
   end
     
-  def add_passenger(passenger)
+  def add_passenger(new_passenger)
     if @passengers.count <= 5
-      if ((@passengers.include?(passenger)) && (driver = passenger))
-        puts "#{passenger} is already in car"
+      if ((@passengers.include?(new_passenger)) && (driver = new_passenger))
+        puts "#{new_passenger} is already in car"
       else
-        @passengers << passenger 
+        @passengers << new_passenger 
       end
     end
   end
@@ -41,7 +45,6 @@ end
 
 
 class Passenger
-  
   attr_accessor :name, :age
   
   def to_s
@@ -59,8 +62,8 @@ car1 = Car.new()
 car1.name = "Astra"
 car1.brand = "Opel"
 
-puts "Car1 definition : #{car1}"
-# "#{car1}" est équivalent à la méthode to_s c-a-d : "Brand : #{brand}, Name: #{name}"
+
+
  
 #car2 = Car.new()
 #car2.name = "A5"
@@ -81,21 +84,34 @@ p3 = Passenger.new()
 p3.name = "Robert"             
 p3.age = 26
 
-car1.driver = p3
-#car2.driver = p2
+
+# l'ordre du "car1.add_passenger" et du "car1.driver " est important pour lalgo du dessu avec les if
+car1.add_passenger(p2)
+car1.add_passenger(p1)
+car1.driver = p1
+
+
+puts "------------"
+
+puts "Car1 definition : #{car1}"
+# "#{car1}" est équivalent à la méthode to_s c-a-d : "Brand : #{brand}, Name: #{name}"
 
 puts "The car1's driver is #{car1.driver}"
 #puts "The car2's driver is #{car2.driver}."
 
-car1.add_passenger(p1)
-car1.add_passenger(p1)
-puts "REPERE"
-#verifier qu'il n'y pas de pasager
+puts "----"
+
+#verifier qu'il n'y pas de passager
 puts "No passenger" if car1.passengers.count == 0
    
-# verifier qu'il y a 1 passager et que c'est p1
-puts "There is a passenger" if car1.passengers.count == 1
+# verifier qu'il y a le passager p1
 puts "#{p2.name} is in the car" if car1.passengers.include?(p2)    
 
 #Afficher tous les passagers de car1    
-puts "Passengers : #{car1.passengers}"
+if car1.passengers.count == 1
+  puts "Passenger : #{car1.passengers}"
+else
+  puts "Passengers : #{car1.passengers}"
+end
+
+puts "------------"
