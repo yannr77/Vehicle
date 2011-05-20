@@ -12,6 +12,9 @@ class Car
     @driver
   end
   
+  def can_drive?(passenger)
+    @driver = passenger if passenger.age > 18
+  end
   
 end
 
