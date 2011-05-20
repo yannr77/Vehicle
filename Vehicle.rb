@@ -1,9 +1,16 @@
 #! /usr/bin/ruby                            
 
 class Car
-    
-  attr_accessor :name, :brand, :driver, :passengers
+  attr_accessor :name, :brand, :driver
 
+  def passengers
+    @passengers
+  end
+
+  def passengers=(value)
+    @passengers = value
+  end
+  
   def initialize
     @passengers = []
   end
@@ -21,16 +28,22 @@ class Car
   end
     
   def add_passenger(passenger)
-    @passengers << passenger
+    if @passengers.count <= 5
+      if ((@passengers.include?(passenger)) && (driver = passenger))
+        puts "#{passenger} is already in car"
+      else
+        @passengers << passenger 
+      end
+    end
   end
-  
+    
 end
 
 
 class Passenger
+  
   attr_accessor :name, :age
-
-
+  
   def to_s
     "#{name} (#{age} years old) "
   end
@@ -41,11 +54,11 @@ class Passenger
   
 end
 
-
 # CARS
 car1 = Car.new()
 car1.name = "Astra"
 car1.brand = "Opel"
+
 puts "Car1 definition : #{car1}"
 # "#{car1}" est équivalent à la méthode to_s c-a-d : "Brand : #{brand}, Name: #{name}"
  
@@ -64,15 +77,19 @@ p2 = Passenger.new()
 p2.name = "Nicolas"             
 p2.age = 15
 
+p3 = Passenger.new()
+p3.name = "Robert"             
+p3.age = 26
 
-car1.driver = p1
+car1.driver = p3
 #car2.driver = p2
+
 puts "The car1's driver is #{car1.driver}"
 #puts "The car2's driver is #{car2.driver}."
 
 car1.add_passenger(p1)
-car1.add_passenger(p2)
-
+car1.add_passenger(p1)
+puts "REPERE"
 #verifier qu'il n'y pas de pasager
 puts "No passenger" if car1.passengers.count == 0
    
