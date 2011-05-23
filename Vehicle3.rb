@@ -31,6 +31,22 @@ class Car
     end
   end
   
+  def passengers
+    @passengers
+  end
+  def initialize
+    @passengers=[]
+  end
+  
+  def add_passenger(new_passenger)
+    if @passengers.count < 5
+       puts "#{new_passenger.name} added"
+      @passengers << new_passenger
+    else 
+      puts "The car is full"  
+    end
+  end
+  
 end
 
 
@@ -79,5 +95,8 @@ car1.name = "Astra"
 car1.brand = "Opel"
 
 car1.driver = p1
+car1.add_passenger(p2)
+car1.add_passenger(p3)
+
 
 puts "Car's definition: #{car1}"
