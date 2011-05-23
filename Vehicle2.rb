@@ -2,7 +2,6 @@
 
 class Car
   # attr_accessor :name, :brand, :driver
-  
   def name
     @name
   end
@@ -31,18 +30,28 @@ class Car
     @passengers = []
   end
   
+  
   def to_s
     "Name: #{name}, Brand: #{brand}, Passengers :#{passengers.count}"
   end
-  
   def driver=(new_driver)
     if new_driver.can_drive?
       puts "Driver: #{new_driver} added"
       @driver = new_driver 
+      if @passengers.include?(new_driver)
+        puts "#{new_driver} is already passager"
+        @passengers.delete(new_driver)
+        puts "#{new_driver} deleted"
+        @driver = new_driver
+        puts "#{new_driver} added to drive"
+      else
+        @driver = new_driver
+        puts "#{new_driver} added to drive."
+      end
     else
       puts "car1 driver is too young!"
     end
-  end 
+  end
   
   def add_passenger(new_passenger)
     if @passengers.include?(new_passenger) or @driver == new_passenger
@@ -55,6 +64,7 @@ class Car
         puts "The car is full"
       end
     end 
+    
   end
   
   def delete_passenger(supp_passenger)
@@ -66,13 +76,14 @@ class Car
     end
   end
   
-  
+  def passengers_list
+    @passengers.join("/")
+  end
 end
 
 
 class People
   # attr_accessor :name, :age
-  
   def name
     @name
   end
@@ -114,16 +125,18 @@ p5.age = 14
 p6 = People.new()
 p6.name = "Intru"
 p6.age = 200
-
 car1 = Car.new()
 car1.name = "Astra"
 car1.brand = "Opel"
 
+
+car1.add_passenger(p1)
 car1.driver = p1
-car1.add_passenger(p2)
 car1.add_passenger(p3)
 car1.add_passenger(p4)
 car1.add_passenger(p5)
-car1.delete_passenger(p6)
- 
+
+puts "-----------" 
 puts "Definition of car1 => #{car1}"
+puts "Passengers : #{car1.passengers_list}"
+puts "Driver : #{car1.driver}"
