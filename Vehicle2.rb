@@ -37,6 +37,7 @@ class Car
   
   def driver=(new_driver)
     if new_driver.can_drive?
+      puts "Driver: #{new_driver} added"
       @driver = new_driver 
     else
       puts "car1 driver is too young!"
@@ -44,13 +45,14 @@ class Car
   end 
   
   def add_passenger(new_passenger)
-    if @passengers.include?(new_passenger)
+    if @passengers.include?(new_passenger) or @driver == new_passenger
       puts "#{new_passenger} is already in car"
     else
       if @passengers.count < 5
+        puts "Passenger: #{new_passenger} added"
         @passengers << new_passenger
       else
-         puts "The car is full"
+        puts "The car is full"
       end
     end 
   end
@@ -105,19 +107,12 @@ p6.age = 200
 car1 = Car.new()
 car1.name = "Astra"
 car1.brand = "Opel"
-car1.driver = p1
 
+car1.driver = p1
 car1.add_passenger(p1)
 car1.add_passenger(p2)
 car1.add_passenger(p3)
 car1.add_passenger(p4)
 car1.add_passenger(p5)
-
  
 puts "Definition of car1 => #{car1}"
-puts "Definition of p1 => #{p1}"
-puts "Definition of p2 => #{p2}"
-puts "Definition of p3 => #{p3}"
-puts "Definition of p4 => #{p4}"
-puts "Definition of p5 => #{p5}"
-puts "Definition of p6 => #{p6}"
