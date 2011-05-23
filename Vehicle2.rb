@@ -44,12 +44,16 @@ class Car
   end 
   
   def add_passenger(new_passenger)
-    if @passengers.count <= 5
-        @passengers << new_passenger   
-    else 
-      puts " The car is full"
-    end
-  end 
+    if @passengers.include?(new_passenger)
+      puts "#{new_passenger} is already in car"
+    else
+      if @passengers.count < 5
+        @passengers << new_passenger
+      else
+         puts "The car is full"
+      end
+    end 
+  end
 end
 
 
