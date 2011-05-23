@@ -15,6 +15,19 @@ class Car
     @passengers = []
   end
 
+  def is_there_a_follower?
+    @passengers.each do |passenger|
+      return true if passenger.can_follow?
+    end
+    false
+  end
+  
+  def followers
+    @passengers.select do |passenger|
+      passenger.can_follow?
+    end
+  end
+
   def to_s
     "Brand : #{brand}, Name: #{name}, Passager(s) : #{@passengers.count} "
   end
@@ -33,14 +46,13 @@ class Car
     
     
   
-    if new_driver.can_accompagnated_drive?
-        if @passengers.accompanist?
-          @driver = new_driver
-        else 
-          "It isn't good"
-        end
-    end
-    
+    #if new_driver.can_accompagnated_drive?
+    #    if @passengers.accompanist?
+    #      @driver = new_driver
+    #    else 
+    #      "It isn't good"
+    #    end
+    #end
   end
     
         
@@ -57,9 +69,7 @@ class Car
   def delete_passenger(sup_passenger)
     @passengers.delete(sup_passenger)
   end
-  
- 
-  
+
 end
 
 
@@ -77,6 +87,10 @@ class Passenger
   def can_accompagnated_drive?
     age > 16 && age < 18
   end
+  
+  def can_follow?
+      age > 22  
+  end
 
 end
 
@@ -84,7 +98,6 @@ end
 car1 = Car.new()
 car1.name = "Astra"
 car1.brand = "Opel"
-
 
 #car2 = Car.new()
 #car2.name = "A5"
@@ -105,15 +118,22 @@ p3 = Passenger.new()
 p3.name = "Robert"             
 p3.age = 26
 
-puts " #{p1} #{p1.can_accompagnated_drive?}"
-puts " #{p2} #{p2.can_accompagnated_drive?}"
-puts " #{p3} #{p3.can_accompagnated_drive?}"
+#puts " #{p1} #{p1.can_accompagnated_drive?}"
+#puts " #{p2} #{p2.can_accompagnated_drive?}"
+#puts " #{p3} #{p3.can_accompagnated_drive?}"
+
+puts " #{p1} #{p1.can_follow?}"
+puts " #{p3} #{p3.can_follow?}"
 
 # l'ordre du "car1.add_passenger" et du "car1.driver " est important pour lalgo du dessu avec les if
 car1.add_passenger(p1)
 car1.add_passenger(p3)
 car1.driver = p2
 #car1.delete_passenger(p2)
+puts " #***** #{car1.followers}"
+puts " #***** #{car1.is_there_a_follower?}"
+
+exit 0
 
 puts "------------"
 

@@ -1,4 +1,4 @@
-1 Créer une méthode Car 
+1 Créer une méthode Car
 2 Une voiture a un nom et une marque
 3 La méthode to_s doit être redéfini pour afficher les caractéristiques d'une voiture
 4 Créer une méthode passager
@@ -10,8 +10,26 @@
 10 véfifier qu'un passager n'es tpas aussi conductuer
 11 Pouvoir retirer un passager de la voiture après qu'il y soit rentré
 12 Si on demande un conducteur qui est déjà passager , le retirer de la liste des passagers
-
-
 13 ajoute rle  nombre de passagers à la description de la voiure
-14 gérer la cnduite accompagné, un conducteur entre 16 et 18 a le droit de conduire si au moins un autre conducteur a plus de 22 dans la voiture.
+
+14 gérer la conduite accompagné, un conducteur entre 16 et 18 a le droit de conduire si au moins un autre passager a plus de 22 ans dans la voiture.
+
+- savoir si un conducteur a entre 16 et 18
+  methode d'instance de Passenger
+  renvoi vrai ou faux
+
+- savoir si un passager d'une voiture a plus de 22
+  methode d'instance de voiture
+  renvoi vrai ou faux
+
+- avant de donner le volant, vérifier ces deux conditions
+  modification de la methode driver=
+
+
 15 ajouter une méthode d'instance à la classe Passager : enter_car(car)
+
+16 Ajout d'une classe moto n'a qu'un seul passager psosible, sinon se comporte pareil
+17 La méthode add_passengers doit permettre d'ajouter un tableau de passager
+18 La méthode add_passenger doit accepter un tableau ou un seul passager
+19 La méthode add_passenger doit faire une erreur si elle recoit autre chose qu'un passenger ou un tableau
+20 Driver doit devenir une sous classe de Passenger
