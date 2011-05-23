@@ -4,6 +4,7 @@ class Car
   # attr_accessor :name, :brand, :driver
   def name
     @name
+
   end
   def name=(value)
     @name = value
@@ -29,15 +30,20 @@ class Car
   def initialize
     @passengers = []
   end
-  
-  
+
+
   def to_s
     "Name: #{name}, Brand: #{brand}, Passengers :#{passengers.count}"
   end
+  
+  def accepts_young_driver?(new_driver)
+    new_driver.can_drive_followed? && self.accepts_a_young_driver?
+  end
+  
   def driver=(new_driver)
-    if new_driver.can_drive?
+    if new_driver.can_drive_alone? or (self.accepts_young_driver?(new_driver))
       puts "Driver: #{new_driver} added"
-      @driver = new_driver 
+      @driver = new_driver
       if @passengers.include?(new_driver)
         puts "#{new_driver} is already passager"
         @passengers.delete(new_driver)
@@ -63,24 +69,28 @@ class Car
       else
         puts "The car is full"
       end
-    end 
-    
+    end
   end
-  
+
   def delete_passenger(supp_passenger)
     if @passengers.include?(supp_passenger)
-      @passengers.delete(supp_passenger) 
+      @passengers.delete(supp_passenger)
       puts "#{supp_passenger} deleted"
     else
       puts "#{supp_passenger} isn't a car's passenger."
     end
   end
-  
+
   def passengers_list
     @passengers.join("/")
   end
-end
 
+  def accepts_a_young_driver?
+    @passengers.each do |passenger|
+      return true if passenger.age > 22
+    end
+  end
+end
 
 class People
   # attr_accessor :name, :age
@@ -88,7 +98,7 @@ class People
     @name
   end
   def name=(value)
-    @name = value 
+    @name = value
   end
   def age
     @age
@@ -97,15 +107,18 @@ class People
     @age = value
   end
 
-  def can_drive?
+  def can_drive_alone?
     @age > 18
+  end
+
+  def can_drive_followed?
+    @age < 18 && @age > 16
   end
 
   def to_s
     "Name: #{name}, Age: #{age}"
   end
 end
-
 
 p1 = People.new()
 p1.name = "Yann"
@@ -130,13 +143,17 @@ car1.name = "Astra"
 car1.brand = "Opel"
 
 
-car1.add_passenger(p1)
+
 car1.driver = p1
+car1.add_passenger(p1)
 car1.add_passenger(p3)
 car1.add_passenger(p4)
 car1.add_passenger(p5)
 
-puts "-----------" 
+car1.driver = p2
+
+puts "-----------"
 puts "Definition of car1 => #{car1}"
 puts "Passengers : #{car1.passengers_list}"
 puts "Driver : #{car1.driver}"
+
