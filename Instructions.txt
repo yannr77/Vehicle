@@ -1,4 +1,4 @@
-1 Créer une méthode Car
+1 Créer une Class Car
 2 Une voiture a un nom et une marque
 3 La méthode to_s doit être redéfini pour afficher les caractéristiques d'une voiture
 4 Créer une méthode passager
