@@ -20,3 +20,28 @@ class Car
   end 
 
 end
+
+
+car1 = Car.new()
+car1.name = "Astra"
+car1.brand = "Opel"
+
+class People
+  
+  def name
+    @name
+  end
+  def name=(value)
+    @name = value
+  end
+  def age
+    @age
+  end
+  def age=(value)
+    @age = value
+  end
+  
+  
+  
+  
+end
