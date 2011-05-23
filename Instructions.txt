@@ -1,8 +1,8 @@
 1 Créer une Class Car.
 2 Une voiture a un nom et une marque.
 3 La méthode to_s doit être redéfini pour afficher les caractéristiques d'une voiture
-4 Créer une méthode passager
-5 Un passager a un nom et un age
+4 Créer une méthode people
+5 Un people a un nom et un age
 6 Ajouter un conducteur a la voiture
 7 Refuser un conducteur qui n'a pas l'age
 8 Ajouter une méthode passengers , n'accpeter que 5 passager max
