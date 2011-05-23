@@ -29,10 +29,6 @@ class Car
 end
 
 
-car1 = Car.new()
-car1.name = "Astra"
-car1.brand = "Opel"
-
 class People
   
   def name
@@ -49,3 +45,31 @@ class People
   end
 
 end
+
+car1 = Car.new()
+car1.name = "Astra"
+car1.brand = "Opel"
+
+p1 = People.new()
+p1.name = "Yann"
+p1.age = 19
+p2 = People.new()
+p2.name = "Nicolas"
+p2.age = 17
+p3 = People.new()
+p3.name = "Véronique"
+p3.age = 48
+p4 = People.new()
+p4.name = "Roland"
+p4.age = 51
+p5 = People.new()
+p5.name = "Coline"
+p5.age = 14
+p6 = People.new()
+p6.name = "Intru"
+p6.age = 200
+
+car1.driver = p1
+
+
+
