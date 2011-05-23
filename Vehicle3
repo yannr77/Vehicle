@@ -19,6 +19,13 @@ class Car
   puts "Name: #{@name} Brand: #{@brand}"
   end 
 
+  def driver
+    @driver
+  end
+  def driver=(new_driver)
+    @driver = new_driver
+  end
+  
 end
 
 
@@ -40,8 +47,5 @@ class People
   def age=(value)
     @age = value
   end
-  
-  
-  
-  
+
 end
