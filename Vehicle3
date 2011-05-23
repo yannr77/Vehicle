@@ -2,6 +2,19 @@
 
 class Car
 
+  def name
+    @name
+  end
+  def brand
+    @brand
+  end
+  def name=(value)
+    @name = value
+  end
+  def brand=(value)
+    @brand = value
+  end
+
 
 
 end
