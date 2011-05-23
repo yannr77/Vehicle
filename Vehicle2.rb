@@ -56,6 +56,17 @@ class Car
       end
     end 
   end
+  
+  def delete_passenger(supp_passenger)
+    if @passengers.include?(supp_passenger)
+      @passengers.delete(supp_passenger) 
+      puts "#{supp_passenger} deleted"
+    else
+      puts "#{supp_passenger} isn't a car's passenger."
+    end
+  end
+  
+  
 end
 
 
@@ -109,10 +120,10 @@ car1.name = "Astra"
 car1.brand = "Opel"
 
 car1.driver = p1
-car1.add_passenger(p1)
 car1.add_passenger(p2)
 car1.add_passenger(p3)
 car1.add_passenger(p4)
 car1.add_passenger(p5)
+car1.delete_passenger(p6)
  
 puts "Definition of car1 => #{car1}"
