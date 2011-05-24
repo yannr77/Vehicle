@@ -51,6 +51,11 @@ class Car
     end
   end
   
+  def delete_passenger(supp_passenger)
+    @passengers.delete(supp_passenger)
+    puts "#{supp_passenger} deleted" 
+  end
+    
   def passengers_list
     @passengers.join("/")
   end
