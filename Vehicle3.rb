@@ -1,7 +1,17 @@
 #! /usr/bin/ruby
 
 class Vehicle
-  attr_accessor :name, :brand, :driver, :passengers
+  attr_accessor :name, :brand, :driver
+
+  def passengers
+    @passengers
+  end
+  
+  def passengers=(value)
+    @passengers = value
+  end
+  
+  @@max_passenger_count = 0
   
   def to_s
     s = []
@@ -23,34 +33,44 @@ class Vehicle
        puts "#{supp_passenger} isn't a vehicle's passenger."
      end
    end
+
+   def add_passenger(new_passenger)
+     if @passengers.count < @@max_passenger_count
+       if @passengers.include?(new_passenger) or @driver == new_passenger
+         puts "#{new_passenger.name} is already on moto"
+       else
+        puts "#{new_passenger.name} added to (#{self.class})"
+        @passengers << new_passenger
+       end
+     else 
+       puts "The moto is full"  
+     end
+   end
+
+   def passengers_list
+     @passengers.join(" ,")
+   end
+
+   def add_passengers( passengers )
+     passengers.each { |passenger| add_passenger(passenger) }
+   end
+
 end
 
 
 class Moto < Vehicle
-  
+  @@max_passenger_count = 1
+
   def driver=(new_driver)   
     @passengers.delete(new_driver) if @passengers.include?(new_driver)
      @driver = new_driver
      puts "#{@driver.name} added to drive" 
-  end
-  
-  def add_passenger(new_passenger)
-    if @passengers.count < 1
-      if @passengers.include?(new_passenger) or @driver == new_passenger
-        puts "#{new_passenger.name} is already on moto"
-      else
-       puts "#{new_passenger.name} added (moto)"
-       @passengers << new_passenger
-      end
-    else 
-      puts "The moto is full"  
-    end
-  end
+  end  
 end
 
 
 class Car < Vehicle
-attr_accessor :passengers
+  @@max_passenger_count = 4
   
   def accepts_a_young_driver?
     @passengers.each do |passenger|
@@ -71,40 +91,23 @@ attr_accessor :passengers
       puts "People is too younger"
     end
   end
-  
-  def add_passenger(new_passenger)
-    if @passengers.count < 5 
-      if @passengers.include?(new_passenger) or @driver == new_passenger
-        puts "#{new_passenger.name} is already in car"
-      else
-       puts "#{new_passenger.name} added (car)"
-       @passengers << new_passenger
-      end
-    else 
-      puts "The car is full"  
-    end
-  end
-  
-  def passengers_list
-    @passengers.join(" ,")
-  end
-  
+    
 end
 
 class People
   attr_accessor :name, :age
   
   def enter_car(car)
-      if car.passengers.count < 5 
-        if car.passengers.include?(self) or car.driver == self
-          puts "#{self.name} is already in car"
-        else
-         puts "#{self.name} added (car2)"
-         car.passengers << self
-        end
-      else 
-        puts "The car is full"  
+    if car.passengers.count < 5 
+      if car.passengers.include?(self) or car.driver == self
+        puts "#{self.name} is already in car"
+      else
+       puts "#{self.name} added (car2)"
+       car.passengers << self
       end
+    else 
+      puts "The car is full"  
+    end
   end
 
   def to_s
@@ -156,15 +159,23 @@ puts "========="
 car1 = Car.new()
 car1.name = "Astra"
 car1.brand = "Opel"
-car1.driver = p2
-car1.driver = p3
+car1.driver = p1
 car1.add_passenger(p2)
 car1.add_passenger(p3)
-car1.add_passenger(p4)
-car1.delete_passenger(p4)
+#car1.delete_passenger(p4)
 #p6.enter_car(car1)
+
+puts "--------------"
+car1.add_passengers([p4,p5])
+car1.add_passenger(p4)
+car1.add_passenger([p4,p5])
+puts "--------------"
 
 puts "Car's definition: #{car1}"
 puts "The car's passengers are : #{car1.passengers_list}"
 puts "The driver's car is : #{car1.driver.name}"
 
+si c un tablo ...
+si c une varaible ...
+
+pour savoir BLABLBLA.class
