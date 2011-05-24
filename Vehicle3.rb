@@ -1,5 +1,24 @@
 #! /usr/bin/ruby
 
+class Moto
+attr_accessor :name, :brand, :driver, :passenger
+
+  def to_s
+  "Name: #{name}, Brand: #{brand}."
+  end
+  
+  def driver=(new_driver)
+    puts "The moto's driver is #{new_driver.name}"
+    @driver = new_driver
+  end
+  
+  def add_passenger(new_passenger)
+  @passenger = new_passenger
+  puts "The moto's passenger is #{new_passenger.name}"
+  end
+end
+
+
 class Car
 attr_accessor :name, :brand, :driver, :passengers
 
@@ -40,7 +59,7 @@ attr_accessor :name, :brand, :driver, :passengers
       if @passengers.include?(new_passenger) or @driver == new_passenger
         puts "#{new_passenger.name} is already in car"
       else
-       puts "#{new_passenger.name} added"
+       puts "#{new_passenger.name} added (car)"
        @passengers << new_passenger
       end
     else 
@@ -50,26 +69,13 @@ attr_accessor :name, :brand, :driver, :passengers
   
   def delete_passenger(supp_passenger)
     @passengers.delete(supp_passenger)
-    puts "#{supp_passenger} deleted" 
+    puts "#{supp_passenger} deleted (car)" 
   end
     
   def passengers_list
-    @passengers.join("/")
+    @passengers.join(" ,")
   end
   
-end
-
-class Moto
-attr_accessor :name, :brand, :driver, :passenger
-
-  def to_s
-  "Name: #{name}, Brand: #{brand}."
-  end
-
-  def add_passenger(new_passenger)
-  @passenger = new_passenger
-  puts "The moto's driver is #{new_passenger.name}"
-  end
 end
 
 class People
@@ -111,6 +117,16 @@ p6 = People.new()
 p6.name = "Intru"
 p6.age = 200
 
+#==============MOTO
+moto1 = Moto.new()
+moto1.name = "Z750"
+moto1.brand = "Suzuki"
+moto1.driver = p5
+moto1.add_passenger(p6)
+puts "Moto definition: #{moto1}"
+puts "========="
+
+#==============CAR
 car1 = Car.new()
 car1.name = "Astra"
 car1.brand = "Opel"
@@ -118,14 +134,6 @@ car1.driver = p2
 car1.add_passenger(p2)
 car1.add_passenger(p3)
 car1.add_passenger(p4)
-
-moto1 = Moto.new()
-moto1.name = "Z750"
-moto1.brand = "Suzuki"
-moto1.add_passenger(p6)
-
-puts "#{car1.passengers.join("/")}"
 puts "Car's definition: #{car1}"
-puts "Moto definition: #{moto1}"
 puts "The car's passengers are : #{car1.passengers_list}"
 
