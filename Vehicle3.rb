@@ -25,7 +25,7 @@ attr_accessor :name, :brand, :driver, :passengers
     if new_driver.can_drive_allone? or  (self.accepts_young_driver?(new_driver))
       @passengers.delete(new_driver) if @passengers.include?(new_driver)
       @driver = new_driver
-      puts "The driver is #{@driver.name}"
+      puts "The car's driver is #{@driver.name}"
     else
       puts "People is too younger"
     end
@@ -59,6 +59,18 @@ attr_accessor :name, :brand, :driver, :passengers
   
 end
 
+class Moto
+attr_accessor :name, :brand, :driver, :passenger
+
+  def to_s
+  "Name: #{name}, Brand: #{brand}."
+  end
+
+  def add_passenger(new_passenger)
+  @passenger = new_passenger
+  puts "The moto's driver is #{new_passenger.name}"
+  end
+end
 
 class People
 attr_accessor :name, :age
@@ -98,16 +110,22 @@ p5.age = 14
 p6 = People.new()
 p6.name = "Intru"
 p6.age = 200
+
 car1 = Car.new()
 car1.name = "Astra"
 car1.brand = "Opel"
-
 car1.driver = p2
 car1.add_passenger(p2)
 car1.add_passenger(p3)
 car1.add_passenger(p4)
 
+moto1 = Moto.new()
+moto1.name = "Z750"
+moto1.brand = "Suzuki"
+moto1.add_passenger(p6)
+
 puts "#{car1.passengers.join("/")}"
 puts "Car's definition: #{car1}"
-puts "The passengers are : #{car1.passengers_list}"
+puts "Moto definition: #{moto1}"
+puts "The car's passengers are : #{car1.passengers_list}"
 
