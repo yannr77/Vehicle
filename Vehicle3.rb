@@ -1,19 +1,7 @@
 #! /usr/bin/ruby
 
 class Car
-
-  def name
-    @name
-  end
-  def brand
-    @brand
-  end
-  def name=(value)
-    @name = value
-  end
-  def brand=(value)
-    @brand = value
-  end
+attr_accessor :name, :brand, :driver, :passengers
 
   def to_s
     s = []
@@ -22,10 +10,6 @@ class Car
     s << "Passengers: #{@passengers.count}" if passengers.count > 0
     s.join(", ")
   end 
-
-  def driver
-    @driver
-  end
   
   def driver=(new_driver)
     if new_driver.can_drive_allone?
@@ -37,9 +21,6 @@ class Car
     end
   end
   
-  def passengers
-    @passengers
-  end
   def initialize
     @passengers = []
   end
@@ -71,23 +52,8 @@ end
 
 
 class People
-  
-  def name
-    @name
-  end
+attr_accessor :name, :age
 
-  def name=(value)
-    @name = value
-  end
-  
-  def age
-    @age
-  end
-  
-  def age=(value)
-    @age = value
-  end
-  
   def to_s
     "Name => #{name}, Age => #{age}"
   end
@@ -126,7 +92,6 @@ car1.add_passenger(p2)
 car1.add_passenger(p2)
 
 puts "puts #{car1.passengers.join("/")}"
-
 puts "Car's definition: #{car1}"
 puts "The passengers are : #{car1.passengers_list}"
 
