@@ -10,10 +10,10 @@
 10 véfifier qu'un passager n'es tpas aussi conductuer
 11 Pouvoir retirer un passager de la voiture après qu'il y soit rentré
 12 Si on demande un conducteur qui est déjà passager , le retirer de la liste des passagers
-12bis, créer les passagers à partir d'un tableau dont le cntenu est :
+12bis, créer les passagers à partir d'un tableau dont le contenu est :
 [["Yann",19], ["Nicolas",17], ...]
 
-13 ajoute rle  nombre de passagers à la description de la voiure
+13 ajouter le  nombre de passagers à la description de la voiture
 
 14 gérer la conduite accompagné, un conducteur entre 16 et 18 a le droit de conduire si au moins un autre passager a plus de 22 ans dans la voiture.
 

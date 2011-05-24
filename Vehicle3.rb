@@ -11,8 +11,18 @@ attr_accessor :name, :brand, :driver, :passengers
     s.join(", ")
   end 
   
+  def accepts_a_young_driver?
+    @passengers.each do |passenger|
+      return true if passenger.age > 22
+    end
+  end
+
+  def accepts_young_driver?(new_driver)
+     new_driver.can_drive_followed? && self.accepts_a_young_driver?
+  end
+  
   def driver=(new_driver)
-    if new_driver.can_drive_allone?
+    if new_driver.can_drive_allone? or  (self.accepts_young_driver?(new_driver))
       @passengers.delete(new_driver) if @passengers.include?(new_driver)
       @driver = new_driver
       puts "The driver is #{@driver.name}"
@@ -26,7 +36,6 @@ attr_accessor :name, :brand, :driver, :passengers
   end
   
   def add_passenger(new_passenger)
-    puts "Self #{self}"
     if @passengers.count < 5 
       if @passengers.include?(new_passenger) or @driver == new_passenger
         puts "#{new_passenger.name} is already in car"
@@ -54,12 +63,19 @@ end
 class People
 attr_accessor :name, :age
 
+  def enter_car(car)
+  end
+
   def to_s
     "Name => #{name}, Age => #{age}"
   end
   
   def can_drive_allone?
     @age > 18
+  end
+  
+  def can_drive_followed?
+    @age < 18 && @age > 16
   end
 end
 
@@ -88,10 +104,10 @@ car1.brand = "Opel"
 
 car1.driver = p2
 car1.add_passenger(p2)
-car1.add_passenger(p2)
-car1.add_passenger(p2)
+car1.add_passenger(p3)
+car1.add_passenger(p4)
 
-puts "puts #{car1.passengers.join("/")}"
+puts "#{car1.passengers.join("/")}"
 puts "Car's definition: #{car1}"
 puts "The passengers are : #{car1.passengers_list}"
 
