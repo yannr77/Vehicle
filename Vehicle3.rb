@@ -1,5 +1,12 @@
 #! /usr/bin/ruby
 
+class Vehicle
+end
+
+
+
+
+
 class Moto
 attr_accessor :name, :brand, :driver, :passenger
 
@@ -8,25 +15,32 @@ attr_accessor :name, :brand, :driver, :passenger
   end
   
   def driver=(new_driver)   
-    if @passenger == new_driver 
+    if @passenger == new_driver
+      puts "#{new_driver} is already a passenger."
       @passenger = nil
+      puts "#{@passenger} deleted."
       @driver = new_driver
+      puts "#{new_driver} added to drive."
     else
       @driver = new_driver
+      puts "#{new_driver} added to drive."
     end
   end
   
   def add_passenger(new_passenger)
     if @driver != new_passenger
       @passenger = new_passenger
+      puts "Passenger added : #{new_passenger}."
+    else
+      puts "#{new_passenger} is already a driver."
     end
   end
 end
 
 
-class Car
+class Car < Vehicle
 attr_accessor :name, :brand, :driver, :passengers
-
+  
   def to_s
     s = []
     s << "Name: #{name}" if name != nil
@@ -84,9 +98,19 @@ attr_accessor :name, :brand, :driver, :passengers
 end
 
 class People
-attr_accessor :name, :age
-
+  attr_accessor :name, :age
+  
   def enter_car(car)
+      if car.passengers.count < 5 
+        if car.passengers.include?(self) or car.driver == self
+          puts "#{self.name} is already in car"
+        else
+         puts "#{self.name} added (car2)"
+         car.passengers << self
+        end
+      else 
+        puts "The car is full"  
+      end
   end
 
   def to_s
@@ -126,10 +150,10 @@ p6.age = 200
 moto1 = Moto.new()
 moto1.name = "Z750"
 moto1.brand = "Suzuki"
-moto1.add_passenger(p4)
-moto1.driver = p5
+moto1.driver = p4
+moto1.add_passenger(p5)
 puts "The moto's driver is #{moto1.driver.name}"
-puts "The moto's passenger is #{moto1.passenger.name}"
+puts "The moto's passenger is #{moto1.passenger.name}" if moto1.passenger != nil 
 puts "Moto definition: #{moto1}"
 puts "========="
 
@@ -139,6 +163,7 @@ car1.name = "Astra"
 car1.brand = "Opel"
 car1.driver = p2
 car1.add_passenger(p2)
+p6.enter_car(car1)
 car1.add_passenger(p3)
 car1.add_passenger(p4)
 puts "Car's definition: #{car1}"
