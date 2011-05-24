@@ -31,6 +31,10 @@
 
 15 ajouter une méthode d'instance à la classe Passager : enter_car(car)
 
+----------------
+
+
+
 16 Ajout d'une classe moto n'a qu'un seul passager psosible, sinon se comporte pareil
 17 La méthode add_passengers doit permettre d'ajouter un tableau de passager
 18 La méthode add_passenger doit accepter un tableau ou un seul passager

@@ -16,7 +16,11 @@ class Car
   end
 
   def to_s
-    "Name: #{name}, Brand: #{brand}, Passengers: #{@passengers.count}, Driver: #{@driver.name}" 
+    s = []
+    s << "Name: #{name}" if name != nil
+    s << "Brand: #{brand}" if brand != nil
+    s << "Passengers: #{@passengers.count}" if passengers.count > 0
+    s.join(", ")
   end 
 
   def driver
@@ -25,7 +29,9 @@ class Car
   
   def driver=(new_driver)
     if new_driver.can_drive_allone?
+      @passengers.delete(new_driver) if @passengers.include?(new_driver)
       @driver = new_driver
+      puts "The driver is #{@driver.name}"
     else
       puts "People is too younger"
     end
@@ -35,16 +41,17 @@ class Car
     @passengers
   end
   def initialize
-    @passengers=[]
+    @passengers = []
   end
   
   def add_passenger(new_passenger)
+    puts "Self #{self}"
     if @passengers.count < 5 
       if @passengers.include?(new_passenger) or @driver == new_passenger
         puts "#{new_passenger.name} is already in car"
       else
        puts "#{new_passenger.name} added"
-      @passengers << new_passenger
+       @passengers << new_passenger
       end
     else 
       puts "The car is full"  
@@ -68,18 +75,21 @@ class People
   def name
     @name
   end
+
   def name=(value)
     @name = value
   end
+  
   def age
     @age
   end
+  
   def age=(value)
     @age = value
   end
   
   def to_s
-  "Name => #{name}, Age => #{age}"
+    "Name => #{name}, Age => #{age}"
   end
   
   def can_drive_allone?
@@ -110,11 +120,13 @@ car1 = Car.new()
 car1.name = "Astra"
 car1.brand = "Opel"
 
-car1.driver = p1
-car1.add_passenger(p1)
+car1.driver = p2
 car1.add_passenger(p2)
-car1.add_passenger(p3)
+car1.add_passenger(p2)
+car1.add_passenger(p2)
 
+puts "puts #{car1.passengers.join("/")}"
 
 puts "Car's definition: #{car1}"
 puts "The passengers are : #{car1.passengers_list}"
+
