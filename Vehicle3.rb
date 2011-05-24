@@ -16,7 +16,7 @@ class Car
   end
 
   def to_s
-    "Name: #{name} Brand: #{brand}"
+    "Name: #{name}, Brand: #{brand}, Passengers: #{@passengers.count}" 
   end 
 
   def driver
@@ -40,8 +40,12 @@ class Car
   
   def add_passenger(new_passenger)
     if @passengers.count < 5
+      if @passengers.include?(new_passenger)
+        puts "#{new_passenger.name} is already in car"
+      else
        puts "#{new_passenger.name} added"
       @passengers << new_passenger
+      end
     else 
       puts "The car is full"  
     end
@@ -95,6 +99,7 @@ car1.name = "Astra"
 car1.brand = "Opel"
 
 car1.driver = p1
+car1.add_passenger(p2)
 car1.add_passenger(p2)
 car1.add_passenger(p3)
 
