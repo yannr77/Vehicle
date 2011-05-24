@@ -16,7 +16,7 @@ class Car
   end
 
   def to_s
-    "Name: #{name}, Brand: #{brand}, Passengers: #{@passengers.count}" 
+    "Name: #{name}, Brand: #{brand}, Passengers: #{@passengers.count}, Driver: #{@driver.name}" 
   end 
 
   def driver
@@ -39,8 +39,8 @@ class Car
   end
   
   def add_passenger(new_passenger)
-    if @passengers.count < 5
-      if @passengers.include?(new_passenger)
+    if @passengers.count < 5 
+      if @passengers.include?(new_passenger) or @driver == new_passenger
         puts "#{new_passenger.name} is already in car"
       else
        puts "#{new_passenger.name} added"
@@ -49,6 +49,10 @@ class Car
     else 
       puts "The car is full"  
     end
+  end
+  
+  def passengers_list
+    @passengers.join("/")
   end
   
 end
@@ -69,10 +73,13 @@ class People
     @age = value
   end
   
+  def to_s
+  "Name => #{name}, Age => #{age}"
+  end
+  
   def can_drive_allone?
     @age > 18
   end
-  
 end
 
 
@@ -99,9 +106,10 @@ car1.name = "Astra"
 car1.brand = "Opel"
 
 car1.driver = p1
-car1.add_passenger(p2)
+car1.add_passenger(p1)
 car1.add_passenger(p2)
 car1.add_passenger(p3)
 
 
 puts "Car's definition: #{car1}"
+puts "The passengers are : #{car1.passengers_list}"
