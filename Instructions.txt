@@ -32,7 +32,7 @@
 15 ajouter une méthode d'instance à la classe Passager : enter_car(car)
 
 ----------------
-
+15 bis : Faire un heritage pour tout simplifier.
 
 
 16 Ajout d'une classe moto n'a qu'un seul passager psosible, sinon se comporte pareil

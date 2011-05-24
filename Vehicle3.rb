@@ -1,45 +1,7 @@
 #! /usr/bin/ruby
 
 class Vehicle
-end
-
-
-
-
-
-class Moto
-attr_accessor :name, :brand, :driver, :passenger
-
-  def to_s
-  "Name: #{name}, Brand: #{brand}."
-  end
-  
-  def driver=(new_driver)   
-    if @passenger == new_driver
-      puts "#{new_driver} is already a passenger."
-      @passenger = nil
-      puts "#{@passenger} deleted."
-      @driver = new_driver
-      puts "#{new_driver} added to drive."
-    else
-      @driver = new_driver
-      puts "#{new_driver} added to drive."
-    end
-  end
-  
-  def add_passenger(new_passenger)
-    if @driver != new_passenger
-      @passenger = new_passenger
-      puts "Passenger added : #{new_passenger}."
-    else
-      puts "#{new_passenger} is already a driver."
-    end
-  end
-end
-
-
-class Car < Vehicle
-attr_accessor :name, :brand, :driver, :passengers
+  attr_accessor :name, :brand, :driver, :passengers
   
   def to_s
     s = []
@@ -47,7 +9,48 @@ attr_accessor :name, :brand, :driver, :passengers
     s << "Brand: #{brand}" if brand != nil
     s << "Passengers: #{@passengers.count}" if passengers.count > 0
     s.join(", ")
-  end 
+  end
+  
+  def initialize
+    @passengers = []
+  end
+  
+  def delete_passenger(supp_passenger)
+     if @passengers.include?(supp_passenger)
+       @passengers.delete(supp_passenger)
+       puts "#{supp_passenger} deleted"
+     else
+       puts "#{supp_passenger} isn't a vehicle's passenger."
+     end
+   end
+end
+
+
+class Moto < Vehicle
+  
+  def driver=(new_driver)   
+    @passengers.delete(new_driver) if @passengers.include?(new_driver)
+     @driver = new_driver
+     puts "#{@driver.name} added to drive" 
+  end
+  
+  def add_passenger(new_passenger)
+    if @passengers.count < 1
+      if @passengers.include?(new_passenger) or @driver == new_passenger
+        puts "#{new_passenger.name} is already on moto"
+      else
+       puts "#{new_passenger.name} added (moto)"
+       @passengers << new_passenger
+      end
+    else 
+      puts "The moto is full"  
+    end
+  end
+end
+
+
+class Car < Vehicle
+attr_accessor :passengers
   
   def accepts_a_young_driver?
     @passengers.each do |passenger|
@@ -69,10 +72,6 @@ attr_accessor :name, :brand, :driver, :passengers
     end
   end
   
-  def initialize
-    @passengers = []
-  end
-  
   def add_passenger(new_passenger)
     if @passengers.count < 5 
       if @passengers.include?(new_passenger) or @driver == new_passenger
@@ -86,11 +85,6 @@ attr_accessor :name, :brand, :driver, :passengers
     end
   end
   
-  def delete_passenger(supp_passenger)
-    @passengers.delete(supp_passenger)
-    puts "#{supp_passenger} deleted (car)" 
-  end
-    
   def passengers_list
     @passengers.join(" ,")
   end
@@ -151,9 +145,10 @@ moto1 = Moto.new()
 moto1.name = "Z750"
 moto1.brand = "Suzuki"
 moto1.driver = p4
-moto1.add_passenger(p5)
+moto1.add_passenger(p6)
+moto1.delete_passenger(p6)
 puts "The moto's driver is #{moto1.driver.name}"
-puts "The moto's passenger is #{moto1.passenger.name}" if moto1.passenger != nil 
+puts "The moto's passenger is #{moto1.passengers}" if moto1.passengers.count > 0 
 puts "Moto definition: #{moto1}"
 puts "========="
 
@@ -162,10 +157,14 @@ car1 = Car.new()
 car1.name = "Astra"
 car1.brand = "Opel"
 car1.driver = p2
+car1.driver = p3
 car1.add_passenger(p2)
-p6.enter_car(car1)
 car1.add_passenger(p3)
 car1.add_passenger(p4)
+car1.delete_passenger(p4)
+#p6.enter_car(car1)
+
 puts "Car's definition: #{car1}"
 puts "The car's passengers are : #{car1.passengers_list}"
+puts "The driver's car is : #{car1.driver.name}"
 
