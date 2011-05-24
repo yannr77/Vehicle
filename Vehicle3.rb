@@ -7,14 +7,19 @@ attr_accessor :name, :brand, :driver, :passenger
   "Name: #{name}, Brand: #{brand}."
   end
   
-  def driver=(new_driver)
-    puts "The moto's driver is #{new_driver.name}"
-    @driver = new_driver
+  def driver=(new_driver)   
+    if @passenger == new_driver 
+      @passenger = nil
+      @driver = new_driver
+    else
+      @driver = new_driver
+    end
   end
   
   def add_passenger(new_passenger)
-  @passenger = new_passenger
-  puts "The moto's passenger is #{new_passenger.name}"
+    if @driver != new_passenger
+      @passenger = new_passenger
+    end
   end
 end
 
@@ -121,8 +126,10 @@ p6.age = 200
 moto1 = Moto.new()
 moto1.name = "Z750"
 moto1.brand = "Suzuki"
+moto1.add_passenger(p4)
 moto1.driver = p5
-moto1.add_passenger(p6)
+puts "The moto's driver is #{moto1.driver.name}"
+puts "The moto's passenger is #{moto1.passenger.name}"
 puts "Moto definition: #{moto1}"
 puts "========="
 
