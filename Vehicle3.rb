@@ -175,7 +175,3 @@ puts "Car's definition: #{car1}"
 puts "The car's passengers are : #{car1.passengers_list}"
 puts "The driver's car is : #{car1.driver.name}"
 
-si c un tablo ...
-si c une varaible ...
-
-pour savoir BLABLBLA.class
