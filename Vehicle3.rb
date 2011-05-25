@@ -1,7 +1,7 @@
 #! /usr/bin/ruby
 
 class Vehicle
-  attr_accessor :name, :brand, :driver
+  attr_accessor :name, :brand, :driver, :color
 
   def passengers
     @passengers
@@ -15,10 +15,11 @@ class Vehicle
   
   def to_s
     s = []
-    s << "Name: #{name}" if name != nil
+    s << "#{self.class}: #{name}" if name != nil
     s << "Brand: #{brand}" if brand != nil
+    s << "Color: #{color}" if color != nil
     s << "Passengers: #{@passengers.count}" if passengers.count > 0
-    s.join(", ")
+    s.join("\n\t")
   end
   
   def initialize
@@ -159,6 +160,7 @@ puts "========="
 car1 = Car.new()
 car1.name = "Astra"
 car1.brand = "Opel"
+car1.color = "Blue"
 car1.driver = p1
 car1.add_passenger(p2)
 car1.add_passenger(p3)
