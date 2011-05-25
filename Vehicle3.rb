@@ -37,13 +37,13 @@ class Vehicle
    def add_passenger(new_passenger)
      if @passengers.count < @@max_passenger_count
        if @passengers.include?(new_passenger) or @driver == new_passenger
-         puts "#{new_passenger.name} is already on moto"
+         puts "#{new_passenger.name} is already present"
        else
         puts "#{new_passenger.name} added to (#{self.class})"
         @passengers << new_passenger
        end
      else 
-       puts "The moto is full"  
+       puts "The #{self.class} is full"  
      end
    end
 
