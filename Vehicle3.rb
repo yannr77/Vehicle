@@ -84,7 +84,7 @@ class Car < Vehicle
   end
   
   def driver=(new_driver)
-    if new_driver.can_drive_allone? or  (self.accepts_young_driver?(new_driver))
+    if new_driver.can_drive_alone? or  (self.accepts_young_driver?(new_driver))
       @passengers.delete(new_driver) if @passengers.include?(new_driver)
       @driver = new_driver
       puts "The car's driver is #{@driver.name}"
@@ -115,7 +115,7 @@ class People
     "Name => #{name}, Age => #{age}"
   end
   
-  def can_drive_allone?
+  def can_drive_alone?
     @age > 18
   end
   
