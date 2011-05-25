@@ -39,4 +39,8 @@
 17 La méthode add_passengers doit permettre d'ajouter un tableau de passager
 18 La méthode add_passenger doit accepter un tableau ou un seul passager
 19 La méthode add_passenger doit faire une erreur si elle recoit autre chose qu'un passenger ou un tableau
-20 Driver doit devenir une sous classe de Passenger
+20 ajouter une méthode drive_car sur un People (et l'implémanter)
+
+
+21 Créer un compte sur : https://github.com/
+22 Créer une clef ssh public keys en suivant les instructions.
