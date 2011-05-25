@@ -103,7 +103,7 @@ class People
       if car.passengers.include?(self) or car.driver == self
         puts "#{self.name} is already in car"
       else
-       puts "#{self.name} added (car2)"
+       puts "#{self.name} added (car)"
        car.passengers << self
       end
     else 
@@ -122,8 +122,12 @@ class People
   def can_drive_followed?
     @age < 18 && @age > 16
   end
-end
 
+  def drive_car(car)
+    car.driver= self
+  end
+  
+end
 
 p1 = People.new()
 p1.name = "Yann"
@@ -161,16 +165,17 @@ car1 = Car.new()
 car1.name = "Astra"
 car1.brand = "Opel"
 car1.color = "Blue"
-car1.driver = p1
+p1.drive_car(car1)
+#car1.driver = p1
 car1.add_passenger(p2)
 car1.add_passenger(p3)
 #car1.delete_passenger(p4)
 #p6.enter_car(car1)
 
 puts "--------------"
-car1.add_passengers([p4,p5])
-car1.add_passenger(p4)
-car1.add_passenger([p4,p5])
+#car1.add_passengers([p4,p5])
+#car1.add_passenger(p4)
+#car1.add_passenger([p4,p5])
 puts "--------------"
 
 puts "Car's definition: #{car1}"
