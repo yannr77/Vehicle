@@ -1,31 +1,50 @@
 #! /usr/bin/ruby
 
+class Place
+  attr_accessor :name
+  
+  def initialize(name)
+    @name = name
+  end
+  
+  def to_s
+    name
+  end
+end
+
+
 class Vehicle
-  attr_accessor :name, :brand, :driver, :color
+  attr_accessor :name, :brand, :driver, :color, :place
+
+  def travel_to(new_place)
+    
+  end
 
   def passengers
     @passengers
   end
-  
+
   def passengers=(value)
     @passengers = value
   end
-  
+
   @@max_passenger_count = 0
-  
+
   def to_s
     s = []
     s << "#{self.class}: #{name}" if name != nil
+    s << "Place: #{place}" if place != nil
     s << "Brand: #{brand}" if brand != nil
     s << "Color: #{color}" if color != nil
     s << "Passengers: #{@passengers.count}" if passengers.count > 0
     s.join("\n\t")
   end
-  
-  def initialize
+
+  def initialize(place)
     @passengers = []
+    @place = place
   end
-  
+
   def delete_passenger(supp_passenger)
      if @passengers.include?(supp_passenger)
        @passengers.delete(supp_passenger)
@@ -43,8 +62,8 @@ class Vehicle
         puts "#{new_passenger.name} added to (#{self.class})"
         @passengers << new_passenger
        end
-     else 
-       puts "The #{self.class} is full"  
+     else
+       puts "The #{self.class} is full"
      end
    end
 
@@ -62,17 +81,17 @@ end
 class Moto < Vehicle
   @@max_passenger_count = 1
 
-  def driver=(new_driver)   
+  def driver=(new_driver)
     @passengers.delete(new_driver) if @passengers.include?(new_driver)
      @driver = new_driver
-     puts "#{@driver.name} added to drive" 
-  end  
+     puts "#{@driver.name} added to drive"
+  end
 end
 
 
 class Car < Vehicle
   @@max_passenger_count = 4
-  
+
   def accepts_a_young_driver?
     @passengers.each do |passenger|
       return true if passenger.age > 22
@@ -82,7 +101,7 @@ class Car < Vehicle
   def accepts_young_driver?(new_driver)
      new_driver.can_drive_followed? && self.accepts_a_young_driver?
   end
-  
+
   def driver=(new_driver)
     if new_driver.can_drive_alone? or  (self.accepts_young_driver?(new_driver))
       @passengers.delete(new_driver) if @passengers.include?(new_driver)
@@ -92,33 +111,34 @@ class Car < Vehicle
       puts "People is too younger"
     end
   end
-    
+
 end
+
 
 class People
   attr_accessor :name, :age
-  
+
   def enter_car(car)
-    if car.passengers.count < 5 
+    if car.passengers.count < 5
       if car.passengers.include?(self) or car.driver == self
         puts "#{self.name} is already in car"
       else
        puts "#{self.name} added (car)"
        car.passengers << self
       end
-    else 
-      puts "The car is full"  
+    else
+      puts "The car is full"
     end
   end
 
   def to_s
     "Name => #{name}, Age => #{age}"
   end
-  
+
   def can_drive_alone?
     @age > 18
   end
-  
+
   def can_drive_followed?
     @age < 18 && @age > 16
   end
@@ -126,8 +146,12 @@ class People
   def drive_car(car)
     car.driver= self
   end
-  
+
 end
+
+paris = Place.new("Paris")
+lyon = Place.new("Lyon")
+
 
 p1 = People.new()
 p1.name = "Yann"
@@ -149,19 +173,19 @@ p6.name = "Intru"
 p6.age = 200
 
 #==============MOTO
-moto1 = Moto.new()
+moto1 = Moto.new(paris)
 moto1.name = "Z750"
 moto1.brand = "Suzuki"
 moto1.driver = p4
 moto1.add_passenger(p6)
 moto1.delete_passenger(p6)
 puts "The moto's driver is #{moto1.driver.name}"
-puts "The moto's passenger is #{moto1.passengers}" if moto1.passengers.count > 0 
+puts "The moto's passenger is #{moto1.passengers}" if moto1.passengers.count > 0
 puts "Moto definition: #{moto1}"
 puts "========="
 
 #==============CAR
-car1 = Car.new()
+car1 = Car.new(lyon)
 car1.name = "Astra"
 car1.brand = "Opel"
 car1.color = "Blue"
