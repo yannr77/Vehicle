@@ -1,5 +1,14 @@
 #! /usr/bin/ruby
 
+class Place
+  attr_accessor :name
+  
+  def initialize(name)
+    @name = name
+  end
+end
+
+
 class Vehicle
   attr_accessor :name, :brand, :driver, :color
 
@@ -128,6 +137,9 @@ class People
   end
 
 end
+
+paris = Place.new("Paris")
+
 
 p1 = People.new()
 p1.name = "Yann"
