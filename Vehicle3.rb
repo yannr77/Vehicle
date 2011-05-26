@@ -6,11 +6,19 @@ class Place
   def initialize(name)
     @name = name
   end
+  
+  def to_s
+    name
+  end
 end
 
 
 class Vehicle
-  attr_accessor :name, :brand, :driver, :color
+  attr_accessor :name, :brand, :driver, :color, :place
+
+  def travel_to(new_place)
+    
+  end
 
   def passengers
     @passengers
@@ -25,14 +33,16 @@ class Vehicle
   def to_s
     s = []
     s << "#{self.class}: #{name}" if name != nil
+    s << "Place: #{place}" if place != nil
     s << "Brand: #{brand}" if brand != nil
     s << "Color: #{color}" if color != nil
     s << "Passengers: #{@passengers.count}" if passengers.count > 0
     s.join("\n\t")
   end
 
-  def initialize
+  def initialize(place)
     @passengers = []
+    @place = place
   end
 
   def delete_passenger(supp_passenger)
@@ -104,6 +114,7 @@ class Car < Vehicle
 
 end
 
+
 class People
   attr_accessor :name, :age
 
@@ -139,6 +150,7 @@ class People
 end
 
 paris = Place.new("Paris")
+lyon = Place.new("Lyon")
 
 
 p1 = People.new()
@@ -161,7 +173,7 @@ p6.name = "Intru"
 p6.age = 200
 
 #==============MOTO
-moto1 = Moto.new()
+moto1 = Moto.new(paris)
 moto1.name = "Z750"
 moto1.brand = "Suzuki"
 moto1.driver = p4
@@ -173,7 +185,7 @@ puts "Moto definition: #{moto1}"
 puts "========="
 
 #==============CAR
-car1 = Car.new()
+car1 = Car.new(lyon)
 car1.name = "Astra"
 car1.brand = "Opel"
 car1.color = "Blue"
